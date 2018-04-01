@@ -92,33 +92,36 @@ void
 rel_recvpkt (rel_t *r, packet_t *pkt, size_t n)
 {
   /* Your logic implementation here */
-	/* me sender functionality and receiver funtionality*/
-	/* check if sender*/
-	/* important: check checksum first */
-  if (cksum(pkt->data, n) == pkt->cksum) {
-    if (n < 12) {
-  		/* I'm a sender handling the acks */
-  		fprintf(stderr, "sender recvpkt");
-  		/* if (cksum(pkt->data, n) == pkt->cksum) {
-  			fprintf(stderr, "successfull!")
-  				/*
-  			1) mark as succesfully sent
-  			2) move window */
-  		} else {
-  		/* I'm a receiver handling normal packets*/
-  		fprintf(stderr, "receiver recvpkt");
-  		/* same checksumtest as above*/
-  		/* if (cksum(pkt->data, n) == pkt->cksum) {
-  			1) write into buffer pkt->seqno
-  			2) calculate ack checksum
-  			3) and send it back to sender
-  		} else {
-  			do nothing so far?
-  		}*/
-  	}
+
+  /* Although I cant rely on the correct size, I assume that
+  n is correct. Hence I can check first if the received packet
+  is an ack or a data packet. */
+
+  if (n < 12) {
+    /* ack, that means we need sender functionality */
+    /* check if the checksum is correct */
+    if (cksum(pkt->data, n) == pkt->cksum) {
+      /* packet succesfully sent */
+      /* TODO mark packet as received move window */
+      /* TODO move window */
+    } else {
+      /* Checksum is wrong, dont move window */
+      /* TODO send packet again */
+
+    }
   } else {
-    /* package damaged. send the package again */
-    /* look up send buffer with seqno */
+    /* packet, that means we need receiver functionality */
+    /* check if the checksum is correct */
+    if (cksum(pkt->data, n) == pkt->cksum) {
+      /* packet succesfully reiceved */
+      /* TODO load packet into buffer */
+      /* TODO create ack package */
+      /* TODO send ack package back */
+    } else {
+      /* Checksum is wrong, do*/
+      /* TODO send packet again */
+
+    }
   }
 }
 
