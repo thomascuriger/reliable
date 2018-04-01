@@ -93,7 +93,7 @@ rel_recvpkt (rel_t *r, packet_t *pkt, size_t n)
 {
   /* Your logic implementation here */
 
-  /* Although I cant rely on the correct size, I assume that
+  /* Although I cant rely on the correct size, I now assume that
   n is correct. Hence I can check first if the received packet
   is an ack or a data packet. */
 
@@ -113,7 +113,7 @@ rel_recvpkt (rel_t *r, packet_t *pkt, size_t n)
     /* packet, that means we need receiver functionality */
     /* check if the checksum is correct */
     if (cksum(pkt->data, n) == pkt->cksum) {
-      /* packet succesfully reiceved */
+      /* packet successfully reiceved */
       /* TODO load packet into buffer */
       /* TODO create ack package */
       /* TODO send ack package back */
