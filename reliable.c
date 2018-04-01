@@ -39,6 +39,8 @@ const struct config_common *cc)
 {
     rel_t *r;
 
+    fprintf(stderr, "This would be creating stuff", );
+
     r = xmalloc (sizeof (*r));
     memset (r, 0, sizeof (*r));
 
@@ -56,7 +58,6 @@ const struct config_common *cc)
     if (rel_list)
     rel_list->prev = &r->next;
     rel_list = r;
-
     /* Do any other initialization you need here... */
     // ...
     r->send_buffer = xmalloc(sizeof(buffer_t));
