@@ -65,7 +65,6 @@ const struct config_common *cc)
     r->rec_buffer = xmalloc(sizeof(buffer_t));
     r->rec_buffer->head = NULL;
     // ...
-
     return r;
 }
 
@@ -91,37 +90,35 @@ rel_destroy (rel_t *r)
 void
 rel_recvpkt (rel_t *r, packet_t *pkt, size_t n)
 {
-    /* Your logic implementation here */
+  /* Your logic implementation here */
 	/* me sender functionality and receiver funtionality*/
 	/* check if sender*/
 	/* important: check checksum first */
-	if (n < 12) {
-    
-		/* I'm a sender handling the acks */
-		/* Calculate checksum */
-		/* then compare checksum with received checksum */
-		/* if false, send again */
-		fprintf(stderr, "sender recvpkt");
-		/if (cksum(pkt->data, n) == pkt->cksum) {
-			fprintf(stderr, "successfull!")
-				/*
-			1) mark as succesfully sent
-			2) move window */
-		} else {
-			1) send agen directly from buffer
-		}*/
-	} else {
-		/* I'm a receiver handling normal packets*/
-		fprintf(stderr, "receiver recvpkt");
-		/* same checksumtest as above*/
-		/* if (cksum(pkt->data, n) == pkt->cksum) {
-			1) write into buffer pkt->seqno
-			2) calculate ack checksum
-			3) and send it back to sender
-		} else {
-			do nothing so far?
-		}*/
-	}
+  if (cksum(pkt->data, n) == pkt->cksum) {
+    if (n < 12) {
+  		/* I'm a sender handling the acks */
+  		fprintf(stderr, "sender recvpkt");
+  		/* if (cksum(pkt->data, n) == pkt->cksum) {
+  			fprintf(stderr, "successfull!")
+  				/*
+  			1) mark as succesfully sent
+  			2) move window */
+  		} else {
+  		/* I'm a receiver handling normal packets*/
+  		fprintf(stderr, "receiver recvpkt");
+  		/* same checksumtest as above*/
+  		/* if (cksum(pkt->data, n) == pkt->cksum) {
+  			1) write into buffer pkt->seqno
+  			2) calculate ack checksum
+  			3) and send it back to sender
+  		} else {
+  			do nothing so far?
+  		}*/
+  	}
+  } else {
+    /* package damaged. send the package again */
+    /* look up send buffer with seqno */
+  }
 }
 
 void
