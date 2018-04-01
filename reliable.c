@@ -37,9 +37,18 @@ rel_t *
 rel_create (conn_t *c, const struct sockaddr_storage *ss,
 const struct config_common *cc)
 {
+    /* config_common fields:
+    int window;		           # of unacknowledged packets in flight
+    int timer;			         How often rel_timer called in milliseconds
+    int timeout;			       Retransmission timeout in milliseconds
+    int single_connection;   Exit after first connection failure
+
+    rel_t is a reliable_state
+    */
     rel_t *r;
 
-    fprintf(stderr, "create function" );
+    fprintf(stderr, "create function, gets called automatically");
+
     r = xmalloc (sizeof (*r));
     memset (r, 0, sizeof (*r));
 
@@ -57,7 +66,7 @@ const struct config_common *cc)
     if (rel_list)
     rel_list->prev = &r->next;
     rel_list = r;
-    /* Do any other initialization you need here... */
+    /* TODO Do any other initialization you need here... */
     // ...
     r->send_buffer = xmalloc(sizeof(buffer_t));
     r->send_buffer->head = NULL;
