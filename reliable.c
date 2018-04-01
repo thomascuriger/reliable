@@ -96,9 +96,7 @@ rel_recvpkt (rel_t *r, packet_t *pkt, size_t n)
 	/* check if sender*/
 	/* important: check checksum first */
 	if (n < 12) {
-        if (n==12) {
-            do nothing;
-        }
+    
 		/* I'm a sender handling the acks */
 		/* Calculate checksum */
 		/* then compare checksum with received checksum */
