@@ -39,9 +39,7 @@ const struct config_common *cc)
 {
     rel_t *r;
 
-    fprintf(stderr, "This would be creating stuff");
-
-
+    fprintf(stderr, "create function" );
     r = xmalloc (sizeof (*r));
     memset (r, 0, sizeof (*r));
 
@@ -85,6 +83,7 @@ rel_destroy (rel_t *r)
     buffer_clear(r->rec_buffer);
     free(r->rec_buffer);
     // ...
+    fprintf(stderr, "Destroy function");
 
 }
 
@@ -127,12 +126,14 @@ void
 rel_read (rel_t *s)
 {
     /* Your logic implementation here */
+    fprintf(stderr, "Read function");
 }
 
 void
 rel_output (rel_t *r)
 {
     /* Your logic implementation here */
+    fprintf(stderr, "Output function");
 }
 
 void
