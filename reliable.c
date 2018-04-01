@@ -39,11 +39,8 @@ const struct config_common *cc)
 {
     rel_t *r;
 
-<<<<<<< HEAD
     fprintf(stderr, "This would be creating stuff");
-=======
-    fprintf(stderr, "This would be creating stuff", );
->>>>>>> origin/master
+
 
     r = xmalloc (sizeof (*r));
     memset (r, 0, sizeof (*r));
